@@ -1,0 +1,8 @@
+{
+    "configuration": "serial=minimal,analog=no_out,use_wire=true",
+    "board": "sduino:stm8:stm8sblue",
+    "sketch": "presurator.ino",
+    "output": "./build",
+    "programmer": "stlink2",
+    "port": "COM1"
+}
