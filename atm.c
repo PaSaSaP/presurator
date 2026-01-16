@@ -19,6 +19,10 @@ To calibrate your own sensor, measure the analog read value
 at 0 ATM and at 15.79 ATM and set the defines accordingly.
 */
 
+#if defined(IDEAL_WORLD) + defined(SENSOR_BLACK) + defined(SENSOR_GREEN) > 1
+#error "Only one of IDEAL_WORLD, SENSOR_BLACK, SENSOR_GREEN can be defined"
+#endif
+
 #if defined(IDEAL_WORLD)
 // Ideal world calibration values
 #define MEAS_4_20_MA_MAX_ANALOG_READ (1023) // 10 bit ADC max value
