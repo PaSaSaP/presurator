@@ -11,4 +11,7 @@ void atm_setup(void);
 void atm_update_reading(void);
 struct ATM* atm_get_reading(void);
 
+uint16_t atm_min_calib_value();
+uint16_t atm_max_calib_value();
+
 #endif /* ATM_H_ */

@@ -5,17 +5,17 @@
 #include "atm.h"
 #include "lcd.h"
 
-void main_setup() {
+void main_setup(void) {
   Wire_setClock(400000);
   atm_setup();
-  LCD_Setup();
+  LCD_Setup(atm_min_calib_value(), atm_max_calib_value());
 }
 
 static unsigned long last_atm_update = 0;
 static unsigned long last_lcd_update = 0;
 unsigned long current_time = 0;
 
-void main_loop() {
+void main_loop(void) {
   current_time = millis();
   if (current_time - last_atm_update > 50) {
     last_atm_update = current_time;

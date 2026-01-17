@@ -30,14 +30,22 @@ at 0 Bar and at 16 Bar and set the defines accordingly.
   (MEAS_4_20_MA_MAX_ANALOG_READ * 4 / 20) // Min value for 4mA
 
 #elif defined(SENSOR_BLACK)
-#define MEAS_4_20_MA_MAX_ANALOG_READ (1037)
-#define MEAS_4_20_MA_MIN_ANALOG_READ (204)
+#define MEAS_4_20_MA_MAX_ANALOG_READ (1025)
+#define MEAS_4_20_MA_MIN_ANALOG_READ (213)
 
 #elif defined(SENSOR_GREEN)
 #define MEAS_4_20_MA_MAX_ANALOG_READ (1048)
 #define MEAS_4_20_MA_MIN_ANALOG_READ (209)
 
 #endif
+
+uint16_t atm_min_calib_value() {
+  return MEAS_4_20_MA_MIN_ANALOG_READ;
+}
+
+uint16_t atm_max_calib_value() {
+  return MEAS_4_20_MA_MAX_ANALOG_READ;
+}
 
 static struct ATM atm_reading;
 

@@ -6,12 +6,17 @@
 
 LiquidCrystal_I2C(lcd, LCD_ADDR, 16, 2);
 
-void LCD_Setup() {
+void LCD_Setup(uint16_t min_calib_value, uint16_t max_calib_value) {
 	// initialize the LCD
 	lcd_begin();
 
 	lcd_backlight();
 	lcd_print_s("Presurator 0.1");
+	// Show calibration values
+	lcd_setCursor(0, 1);
+	lcd_print_i(min_calib_value);
+	lcd_print_c('-');
+	lcd_print_i(max_calib_value);
 	delay(1000);
 }
 
