@@ -16,7 +16,7 @@ which means that ideal sensor would have 0 ATM / 0MPa / 0 Bar pressure at 4mA
 
 Different sensors have different calibration values, hence the different defines.
 To calibrate your own sensor, measure the analog read value
-at 0 ATM and at 15.79 ATM and set the defines accordingly.
+at 0 Bar and at 16 Bar and set the defines accordingly.
 */
 
 #if defined(IDEAL_WORLD) + defined(SENSOR_BLACK) + defined(SENSOR_GREEN) > 1
@@ -30,12 +30,12 @@ at 0 ATM and at 15.79 ATM and set the defines accordingly.
   (MEAS_4_20_MA_MAX_ANALOG_READ * 4 / 20) // Min value for 4mA
 
 #elif defined(SENSOR_BLACK)
-#define MEAS_4_20_MA_MAX_ANALOG_READ (1060)
-#define MEAS_4_20_MA_MIN_ANALOG_READ (209)
+#define MEAS_4_20_MA_MAX_ANALOG_READ (1037)
+#define MEAS_4_20_MA_MIN_ANALOG_READ (204)
 
 #elif defined(SENSOR_GREEN)
-#define MEAS_4_20_MA_MAX_ANALOG_READ (1084)
-#define MEAS_4_20_MA_MIN_ANALOG_READ (216)
+#define MEAS_4_20_MA_MAX_ANALOG_READ (1048)
+#define MEAS_4_20_MA_MIN_ANALOG_READ (209)
 
 #endif
 
@@ -52,7 +52,7 @@ static int8_t atm_spikes_cnt = 0;
 
 static long atm_raw_to_pressure(int raw) {
   return map(raw, MEAS_4_20_MA_MIN_ANALOG_READ, MEAS_4_20_MA_MAX_ANALOG_READ, 0,
-             1579); // [ATM / 100], 1.6MPa = 15.79 ATM
+             1600); // [Bar / 100], 1.6MPa = 16.00 Bar
 }
 
 static void assign_pressure_to_reading(struct ATM *reading, long pressure) {

@@ -15,14 +15,14 @@ void LCD_Setup() {
 	delay(1000);
 }
 
-void LCD_Loop(uint16_t raw_atm, int8_t pressure_major, int8_t pressure_minor) {
+void LCD_Loop(uint16_t raw_value, int8_t pressure_major, int8_t pressure_minor) {
 	lcd_clear();
 	lcd_setCursor(0, 0);
 	lcd_print_s("R:");
 	lcd_setCursor(3, 0);
-	lcd_print_u(raw_atm);
+	lcd_print_u(raw_value);
 	lcd_setCursor(0, 1);
-	lcd_print_s("A:");
+	lcd_print_s("B:");
 	lcd_setCursor(pressure_major > 10? 3: 4, 1);
 	lcd_print_u(pressure_major);
 	lcd_setCursor(5, 1);
