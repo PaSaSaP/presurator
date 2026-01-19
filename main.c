@@ -34,6 +34,7 @@ void main_loop(void) {
     struct BMP * bmp_reading = bmp_get_data();
     LCD_Loop(atm_reading->raw, atm_reading->pressure_major,
              atm_reading->pressure_minor, 
-             bmp_reading->temp_major, bmp_reading->temp_minor);
+             bmp_reading->temp_major, bmp_reading->temp_minor,
+            bmp_reading->hum_major, bmp_reading->hum_minor);
   }
 }

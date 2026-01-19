@@ -4,6 +4,8 @@
 struct BMP {
     int8_t temp_major; // [Celsius]
     int8_t temp_minor; // [Celsius / 100]
+    int8_t hum_major; // [humidity in %]
+    int16_t hum_minor; // [humidity / 1024]
 };
 
 void BMP_setup(void);

@@ -35,7 +35,7 @@ static void LCD_print_major_minor(int8_t major, int8_t minor) {
 }
 
 void LCD_Loop(uint16_t raw_value, int8_t pressure_major, int8_t pressure_minor,
-		int8_t temp_major, int8_t temp_minor) {
+		int8_t temp_major, int8_t temp_minor, int8_t humidity_major, int8_t humidity_minor) {
 	lcd_clear();
 	lcd_setCursor(0, 0);
 	LCD_print_char_with_colon('R');
@@ -48,4 +48,8 @@ void LCD_Loop(uint16_t raw_value, int8_t pressure_major, int8_t pressure_minor,
 	LCD_print_char_with_colon('B');
 	lcd_setCursor(pressure_major > 10? 3: 4, 1);
 	LCD_print_major_minor(pressure_major, pressure_minor);
+
+	lcd_setCursor(10, 1);
+	LCD_print_char_with_colon('H');
+	LCD_print_major_minor(humidity_major, humidity_minor);
 }
