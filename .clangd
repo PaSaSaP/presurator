@@ -2,6 +2,6 @@
 CompileFlags:
   Add:
     - -DCLANGD_SEMANTICS_PARSER=1
-    - -DUSE_WIRE=1
+    # - -DUSE_WIRE=1
     - -D_Bool=uint8_t
     - -include Arduino.h

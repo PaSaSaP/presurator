@@ -1,5 +1,5 @@
 {
-    "configuration": "serial=minimal,analog=no_out,use_wire=true",
+    "configuration": "serial=minimal,analog=no_out,use_wire=default,serial_buffer_size=default",
     "board": "sduino:stm8:stm8sblue",
     "sketch": "presurator.ino",
     "output": "./build",
