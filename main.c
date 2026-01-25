@@ -6,7 +6,20 @@
 #include "bmp.h"
 #include "lcd.h"
 
+inline void watchdogInit(void) {
+  IWDG->KR = 0xCC;   // start
+  IWDG->KR = 0x55;   // unlock
+  IWDG->PR = 0x06;   // prescaler 256
+  IWDG->RLR = 255;  // ~500 ms
+  IWDG->KR = 0xAA;  // reload
+}
+
+inline void watchdogKick(void) {
+  IWDG->KR = 0xAA;
+}
+
 void main_setup(void) {
+  watchdogInit();
   I2C_begin();
   atm_setup();
   BMP_setup();
@@ -37,4 +50,5 @@ void main_loop(void) {
              bmp_reading->temp_major, bmp_reading->temp_minor,
             bmp_reading->hum_major, bmp_reading->hum_minor);
   }
+  watchdogKick();
 }
