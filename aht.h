@@ -5,7 +5,7 @@ struct AHT {
     int8_t temp_major; // [Celsius]
     int8_t temp_minor; // [Celsius / 100]
     int8_t hum_major; // [humidity in %]
-    int16_t hum_minor; // [humidity / 1024]
+    int8_t hum_minor; // [humidity / 100]
 };
 
 void AHT_setup(void);

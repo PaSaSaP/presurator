@@ -60,15 +60,16 @@ void AHT_loop(void) {
   ahtState = AhtSensorReadingDone;
 
   // float humidity = (raw_hum * 100.0f) / 1048576.0f;
-  uint32_t adc = AHT_adc_calc(aht_buf+1, 1);
-#define AHT_HUMIDITY_NORMALIZE_FACTOR (10486) // [2**20 / 100]
-  aht_data.hum_major = adc / AHT_HUMIDITY_NORMALIZE_FACTOR;
-  aht_data.hum_minor = abs(adc % AHT_HUMIDITY_NORMALIZE_FACTOR) / 105; // 1048576 / 100 / 105 ~= 99.86
+  int32_t adc = AHT_adc_calc(aht_buf+1, 1);
+  adc = adc * 625 / 65536; // [H / 100], no overflow
+  aht_data.hum_major = adc / 100;
+  aht_data.hum_minor = abs(adc) % 100;
 
   // float temperature = (raw_temp * 200.0f) / 1048576.0f - 50.0f;
   adc = AHT_adc_calc(aht_buf + 3, 0);
-  aht_data.temp_major = adc * 200 / 1048576 - 50;
-  aht_data.temp_minor = abs(adc - ((uint32_t)aht_data.temp_major + 50) * (1048576 / 200)) / 53; // 1048576 / 200 / 53 ~= 98.92
+  adc = adc * 625 / 32768 - 5000; // [T / 100], no overflow
+  aht_data.temp_major = adc / 100;
+  aht_data.temp_minor = abs(adc) % 100;
 }
 
 struct AHT *AHT_getData() { return &aht_data; }
