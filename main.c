@@ -3,7 +3,7 @@
 
 #include "main.h"
 #include "atm.h"
-#include "bmp.h"
+#include "aht.h"
 #include "lcd.h"
 
 inline void watchdogInit(void) {
@@ -22,7 +22,7 @@ void main_setup(void) {
   watchdogInit();
   I2C_begin();
   atm_setup();
-  BMP_setup();
+  AHT_setup();
   LCD_Setup(atm_min_calib_value(), atm_max_calib_value());
 }
 
@@ -39,16 +39,17 @@ void main_loop(void) {
   }
   if (current_time - last_bmp_update > 400) {
     last_bmp_update = current_time;
-    BMP_loop();
+    AHT_loop();
   }
   if (current_time - last_lcd_update > 200) {
     last_lcd_update = current_time;
     struct ATM *atm_reading = atm_get_reading();
-    struct BMP * bmp_reading = bmp_get_data();
+    struct AHT * aht_reading = AHT_getData();
+
     LCD_Loop(atm_reading->raw, atm_reading->pressure_major,
              atm_reading->pressure_minor, 
-             bmp_reading->temp_major, bmp_reading->temp_minor,
-            bmp_reading->hum_major, bmp_reading->hum_minor);
+             aht_reading->temp_major, aht_reading->temp_minor,
+            aht_reading->hum_major, aht_reading->hum_minor);
   }
   watchdogKick();
 }
